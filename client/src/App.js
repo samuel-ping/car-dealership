@@ -15,21 +15,26 @@ function App() {
   ]);
 
   const addListing = (newListing) => {
-    // console.log(newListing);
     const newListings = [...carListings, newListing];
-    console.log(newListings);
     setCarListings(newListings);
   };
 
-  const soldListing = (index) => {
+  const markSold = (index) => {
     const newListings = [...carListings];
     newListings[index].isSold = true;
+    setCarListings(newListings);
+  };
+
+  const markUnsold = (index) => {
+    const newListings = [...carListings];
+    newListings[index].isSold = false;
     setCarListings(newListings);
   };
 
   return (
     <div className="App">
       <h1>Cars</h1>
+      <h2>Add Listing</h2>
       <ListingForm addListing={addListing} />
       <div className="car-list">
         <h2>Listings</h2>
@@ -38,7 +43,8 @@ function App() {
             key={index}
             index={index}
             listing={listing}
-            soldListing={soldListing}
+            markSold={markSold}
+            markUnsold={markUnsold}
           />
         ))}
       </div>
