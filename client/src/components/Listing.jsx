@@ -1,10 +1,24 @@
 import React from "react";
 
-const Listing = (props) => {
+const Listing = ({ key, index, listing, soldListing }) => {
   return (
-    <div className="listing">
-      <span>{props.make}</span>
-      <span>{props.model}</span>
+    <div style={{ display: "flex", flexDirection: "horizontal" }}>
+      <div
+        className="listing-details"
+        style={{ textDecoration: listing.isSold ? "line-through" : "" }}
+      >
+        <span>{listing.make}</span> <span>{listing.model}</span>{" "}
+        <span>{listing.year}</span>
+        <br />
+        <span>${listing.price}</span>
+        <br />
+        <span>{listing.description}</span>
+      </div>
+      {listing.isSold ? (
+        ""
+      ) : (
+        <button onClick={() => soldListing(index)}>Sold</button>
+      )}
     </div>
   );
 };

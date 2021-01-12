@@ -3,11 +3,26 @@ import Listing from "./components/Listing";
 import ListingForm from "./components/ListingForm";
 
 function App() {
-  const [carListings, setCarListing] = useState([]);
+  const [carListings, setCarListings] = useState([
+    {
+      make: "Toyota",
+      model: "Sienna",
+      year: 2001,
+      price: 4000,
+      description: "lovely car, really. Buy it now!",
+      isSold: false,
+    },
+  ]);
 
   const addListing = (text) => {
-    const newListing = [...carListings, { text }];
-    setCarListing(newListing);
+    const newListings = [...carListings, { text }];
+    setCarListings(newListings);
+  };
+
+  const soldListing = (index) => {
+    const newListings = [...carListings];
+    newListings[index].isSold = true;
+    setCarListings(newListings);
   };
 
   return (
@@ -15,8 +30,14 @@ function App() {
       <h1>Cars</h1>
       <ListingForm addListing={addListing} />
       <div className="car-list">
+        <h2>Listings</h2>
         {carListings.map((listing, index) => (
-          <Listing key={index} index={index} make="toyota" model="sienna" />
+          <Listing
+            key={index}
+            index={index}
+            listing={listing}
+            soldListing={soldListing}
+          />
         ))}
       </div>
     </div>
