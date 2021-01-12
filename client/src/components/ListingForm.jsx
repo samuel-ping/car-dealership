@@ -7,19 +7,21 @@ const ListingForm = ({ addListing }) => {
     e.preventDefault();
     if (!listing) return;
     addListing(listing);
-    setListing({
-      ...listing,
-      make: "",
-      model: "",
-      year: "",
-      price: "",
-      description: "",
-    });
+    // console.log(listing);
+    // setListing({
+    //   ...listing,
+    //   make: "",
+    //   model: "",
+    //   year: "",
+    //   price: "",
+    //   description: "",
+    // });
+    // console.log(listing);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label for="make">Make:</label>{" "}
+      Make:{" "}
       <input
         type="text"
         id="make"
@@ -29,7 +31,7 @@ const ListingForm = ({ addListing }) => {
         onChange={(e) => setListing({ ...listing, make: e.target.value })}
       />
       <br />
-      <label for="model">Model:</label>{" "}
+      Model:{" "}
       <input
         type="text"
         id="model"
@@ -39,7 +41,7 @@ const ListingForm = ({ addListing }) => {
         onChange={(e) => setListing({ ...listing, model: e.target.value })}
       />
       <br />
-      <label for="year">Year:</label>{" "}
+      Year:{" "}
       <input
         type="text"
         id="year"
@@ -49,7 +51,7 @@ const ListingForm = ({ addListing }) => {
         onChange={(e) => setListing({ ...listing, year: e.target.value })}
       />
       <br />
-      <label for="price">Price:</label>{" "}
+      Price:{" "}
       <input
         type="number"
         id="price"
@@ -59,7 +61,7 @@ const ListingForm = ({ addListing }) => {
         onChange={(e) => setListing({ ...listing, price: e.target.value })}
       />
       <br />
-      <label for="description">Description:</label>{" "}
+      Description:{" "}
       <input
         type="text"
         id="description"

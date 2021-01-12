@@ -9,13 +9,15 @@ function App() {
       model: "Sienna",
       year: 2001,
       price: 4000,
-      description: "lovely car, really. Buy it now!",
+      description: "lovely car, really. Buy it now! please!",
       isSold: false,
     },
   ]);
 
-  const addListing = (text) => {
-    const newListings = [...carListings, { text }];
+  const addListing = (newListing) => {
+    // console.log(newListing);
+    const newListings = [...carListings, newListing];
+    console.log(newListings);
     setCarListings(newListings);
   };
 
