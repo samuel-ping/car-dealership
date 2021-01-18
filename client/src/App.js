@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
+
 import Listing from "./components/Listing";
 import ListingForm from "./components/ListingForm";
 
 function App() {
-  const [carListings, setCarListings] = useState([
-    {
-      make: "Toyota",
-      model: "Sienna",
-      year: 2001,
-      price: 4000,
-      description: "lovely car, really. Buy it now! please!",
-      isSold: false,
-    },
-  ]);
+  const [carListings, setCarListings] = useState([]);
+
+  // retrieves listings from server
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/listings")
+      .then((res) => {
+        console.log(res.data);
+        setCarListings(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []); // pass empty array in second parameter to prevent useEffect from retriggering (https://stackoverflow.com/a/53243204/13026376)
 
   const addListing = (newListing) => {
+    // axios
+    //   .post("http://localhost:5000/listings", newListing)
+    //   .then(() => {
+    //     alert("Listing added!");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
     const newListings = [...carListings, newListing];
     setCarListings(newListings);
   };
@@ -47,6 +62,19 @@ function App() {
             markUnsold={markUnsold}
           />
         ))}
+      </div>
+      <br />
+      <div>
+        <button
+          onClick={() => {
+            axios.get("http://localhost:5000/listings/stats").then((res) => {
+              console.log(res.data);
+              alert(JSON.stringify(res.data));
+            });
+          }}
+        >
+          Get Stats
+        </button>
       </div>
     </div>
   );
