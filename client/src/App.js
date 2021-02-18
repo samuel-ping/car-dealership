@@ -19,38 +19,48 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []); // pass empty array in second parameter to prevent useEffect from retriggering (https://stackoverflow.com/a/53243204/13026376)
+  }); // TODO: (https://stackoverflow.com/a/53243204/13026376)
 
   const addListing = (newListing) => {
-    // axios
-    //   .post("http://localhost:5000/listings", newListing)
-    //   .then(() => {
-    //     alert("Listing added!");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    const newListings = [...carListings, newListing];
-    setCarListings(newListings);
+    axios
+      .post("http://localhost:5000/listings", newListing)
+      .then(() => {
+        alert("Listing added!");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // const newListings = [...carListings, newListing];
+    // setCarListings(newListings);
   };
 
-  const markSold = (index) => {
-    const newListings = [...carListings];
-    newListings[index].isSold = true;
-    setCarListings(newListings);
+  const markSold = (_id) => {
+    axios
+      .delete("http://localhost:5000/listings/" + _id["$oid"])
+      .then(() => {
+        alert("Listing sold!");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // const newListings = [...carListings];
+    // newListings[index].isSold = true;
+    // setCarListings(newListings);
   };
 
-  const markUnsold = (index) => {
-    const newListings = [...carListings];
-    newListings[index].isSold = false;
-    setCarListings(newListings);
-  };
+  // const markUnsold = (index) => {
+  //   const newListings = [...carListings];
+  //   newListings[index].isSold = false;
+  //   setCarListings(newListings);
+  // };
 
   return (
     <div className="App">
       <h1>Cars</h1>
+
       <h2>Add Listing</h2>
       <ListingForm addListing={addListing} />
+
       <div className="car-list">
         <h2>Listings</h2>
         {carListings.map((listing, index) => (
@@ -59,10 +69,11 @@ function App() {
             index={index}
             listing={listing}
             markSold={markSold}
-            markUnsold={markUnsold}
+            // markUnsold={markUnsold}
           />
         ))}
       </div>
+
       <br />
       <div>
         <button

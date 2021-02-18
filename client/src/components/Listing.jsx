@@ -1,6 +1,11 @@
 import React from "react";
 
-const Listing = ({ index, listing, markSold, markUnsold }) => {
+const Listing = ({
+  index,
+  listing,
+  markSold,
+  // markUnsold
+}) => {
   return (
     <div style={{ display: "flex", flexDirection: "horizontal" }}>
       <div
@@ -15,9 +20,10 @@ const Listing = ({ index, listing, markSold, markUnsold }) => {
         <span>{listing.description}</span>
       </div>
       {listing.isSold ? (
-        <button onClick={() => markUnsold(index)}>Mark Unsold</button>
+        // <button onClick={() => markUnsold(index)}>Mark Unsold</button>
+        <div />
       ) : (
-        <button onClick={() => markSold(index)}>Mark Sold</button>
+        <button onClick={() => markSold(listing._id)}>Mark Sold</button>
       )}
     </div>
   );
